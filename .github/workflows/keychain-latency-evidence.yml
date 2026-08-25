@@ -1,0 +1,19 @@
+name: keychain-latency-evidence
+
+on:
+  push:
+    branches:
+      - evidence/keychain-latency
+
+jobs:
+  measure:
+    runs-on: macos-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Measure Keychain read latency
+        working-directory: evidence
+        run: bash run.sh
